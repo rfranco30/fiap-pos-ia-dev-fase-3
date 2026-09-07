@@ -1,0 +1,40 @@
+
+# PROTOCOLO DE PNEUMONIA HOSPITALAR
+
+## OBJETIVO
+Estabelecer diretrizes para diagnostico e tratamento de pneumonia adquirida em ambiente hospitalar.
+
+## DEFINICAO
+Pneumonia adquirida apos 48 horas de internacao, nao associada a ventilação mecanica.
+
+## DIAGNOSTICO
+### Sinais e Sintomas
+- Febre > 38°C ou hipotermia < 36°C
+- Tosse com expectoração purulenta
+- Dispneia progressiva
+- Dor toracica pleuritica
+- Alteracao do estado mental em idosos
+
+### Exames Complementares
+- Raio-X de torax (infiltrado pulmonar novo ou progressivo)
+- Hemograma completo
+- PCR e Procalcitonina
+- Gasometria arterial
+- Culturas (hemocultiva, ESC, BAL)
+
+## TRATAMENTO
+### Antibioticoterapia Empirica
+- Ceftriaxona 2g IV 24h + Azitromicina 500mg IV 24h
+ou
+- Piperacilina-Tazobactam 4.5g IV 8h + Azitromicina 500mg IV 24h
+
+### Reavaliacao
+- Clinica em 48-72 horas
+- Ajuste conforme antibiograma (despistagem)
+- Duracao minima: 7 dias
+
+## PREVENCAO
+- Higiene das maos
+- Elevacao da cabeceira 30-45 graus
+- Curatismo oral diario
+- Desmame precoce da ventilação mecanica
