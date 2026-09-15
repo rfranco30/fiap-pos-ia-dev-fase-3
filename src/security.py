@@ -6,6 +6,38 @@ import re
 from typing import Dict, Any, Tuple
 
 
+# ============================================
+# REGRAS DE SEGURANCA CENTRALIZADAS
+# ============================================
+
+# Prompt de seguranca para inclusao em respostas
+SAFETY_PROMPT = """
+REGRAS INEGOCIAVEIS DO ASSISTENTE MEDICO:
+1. NUNCA prescreva medicamentos diretamente
+2. NUNCA faca diagnosticos definitivos - apenas sugira hipoteses
+3. SEMPRE inclua: 'Esta resposta e uma sugestao gerada por IA e deve ser validada por um medico especialista antes da decisao clinica.'
+4. SEMPRE cite a fonte do protocolo utilizado
+5. Se nao tiver certeza, diga 'Nao tenho informacao suficiente para esta pergunta'
+6. NUNCA compartilhe dados de pacientes identificaveis
+7. SEMPRE recomende consulta com medico especialista
+"""
+
+# Palavras proibidas em respostas
+PROHIBITED_WORDS = [
+    'prescrever', 'receitar', 'diagnosticar definitivamente',
+    'certeza absoluta', 'garantia', '100% eficaz'
+]
+
+# Palavras-chave de urgencia (consolidado de todas as fontes)
+URGENCY_KEYWORDS = [
+    'emergencia', 'urgente', 'parada cardiaca', 'parada respiratoria',
+    'infarto', 'derrame', 'sangramento', 'choque',
+    'dor toracica', 'avc', 'hemorragia', 'convulsao',
+    'desmaio', 'inconsciencia', 'dificuldade para respirar',
+    'reacao alergica', 'anafilaxia'
+]
+
+
 class MedicalSecurityValidator:
     """Validador de seguranca para respostas medicas."""
 

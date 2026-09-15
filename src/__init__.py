@@ -10,30 +10,34 @@ from typing import List, Dict, Any
 
 def anonymize_text(text: str) -> str:
     """
-    Anonimiza dados sensiveis em texto medico.
+    Anonimiza dados sensiveis em texto medico (conforme LGPD).
     Remove: CPF, RG, CRM, nomes, datas, telefones, emails.
     """
     if not text:
         return text
 
     # CPF: XXX.XXX.XXX-XX
-    text = re.sub(r'\d{3}\.\d{3}\.\d{3}-\d{2}', '[CPF]', text)
+    text = re.sub(r'\d{3}\.\d{3}\.\d{3}-\d{2}', '[CPF-MASCARADO]', text)
 
     # RG: XX.XXX.XXX-X
-    text = re.sub(r'\d{2}\.\d{3}\.\d{3}-\d', '[RG]', text)
+    text = re.sub(r'\d{2}\.\d{3}\.\d{3}-[\dX]', '[RG-MASCARADO]', text)
 
-    # CRM: CRM/XX XXXXX
-    text = re.sub(r'CRM/[A-Z]{2}\s*\d{4,6}', '[CRM]', text)
+    # CRM: CRM/XX XXXXX ou CRM-XX XXXXX
+    text = re.sub(r'CRM[/-]?[A-Z]{2}\s*\d+', '[CRM-MASCARADO]', text)
 
-    # Telefones: (XX) XXXXX-XXXX ou XX XXXXX-XXXX
-    text = re.sub(r'\(\d{2}\)\s*\d{4,5}-\d{4}', '[TELEFONE]', text)
-    text = re.sub(r'\d{2}\s*\d{4,5}-\d{4}', '[TELEFONE]', text)
+    # Telefones: (XX) XXXXX-XXXX
+    text = re.sub(r'\(\d{2}\)\s*\d{4,5}-\d{4}', '[TEL-MASCARADO]', text)
 
     # Emails
-    text = re.sub(r'[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}', '[EMAIL]', text)
+    text = re.sub(r'[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}', '[EMAIL-MASCARADO]', text)
 
-    # datas no formato DD/MM/YYYY
-    text = re.sub(r'\d{2}/\d{2}/\d{4}', '[DATA]', text)
+    # Datas: DD/MM/YYYY
+    text = re.sub(r'\d{2}/\d{2}/\d{4}', '[DATA-MASCARADA]', text)
+
+    # Nomes comuns (lista basica)
+    nomes_comuns = ['Ana', 'Maria', 'Joao', 'Jose', 'Pedro', 'Paula', 'Lucia', 'Fernanda', 'Carlos']
+    for nome in nomes_comuns:
+        text = re.sub(rf'\b{nome}\b', '[NOME-MASCARADO]', text, flags=re.IGNORECASE)
 
     return text
 

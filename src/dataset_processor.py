@@ -7,20 +7,8 @@ import json
 import xml.etree.ElementTree as ET
 from typing import List, Dict, Any
 
-
-def save_json(data: Any, file_path: str, indent: int = 2) -> None:
-    """Salva dados em arquivo JSON."""
-    os.makedirs(os.path.dirname(file_path), exist_ok=True)
-    with open(file_path, 'w', encoding='utf-8') as f:
-        json.dump(data, f, indent=indent, ensure_ascii=False)
-
-
-def save_jsonl(data: List[Dict], file_path: str) -> None:
-    """Salva lista de dicionarios em formato JSONL."""
-    os.makedirs(os.path.dirname(file_path), exist_ok=True)
-    with open(file_path, 'w', encoding='utf-8') as f:
-        for item in data:
-            f.write(json.dumps(item, ensure_ascii=False) + '\n')
+# Importar funcoes utilitarias do modulo principal
+from src import save_json, save_jsonl
 
 
 def process_pubmedqa(file_path: str, max_samples: int = 500) -> List[Dict]:
